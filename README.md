@@ -1,0 +1,1 @@
+# codingame-sync-userscript
