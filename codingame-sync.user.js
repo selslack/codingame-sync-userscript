@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name     Codingame File Sync
-// @match    *://code.codingame.com/*
+// @match    *://www.codingame.com/ide/*
 // @version  1.1
 // @grant    none
 // ==/UserScript==
