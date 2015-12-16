@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name     Codingame File Sync
-// @match    *://code.codingame.com/*
-// @version  1.0
+// @match    *://www.codingame.com/ide/*
+// @version  1.1
 // @grant    none
 // ==/UserScript==
 
 (function() {
     setInterval(function () {
-        $("#inputParent > div.squareTitle > div.tools")
+        $(".code-buttons")
             .filter(function () {
                 return !($(this).data("syncInputOk") === true);
             })
@@ -17,10 +17,9 @@
                     .prepend("<div><form><input type=\"file\" class=\"syncInput\" /></form></div>");
             });
 
-        $("#inputParent div.squareTitle > div.tools form > input.syncInput").each(function () {
+        $(".syncInput").each(function () {
             var reader = new FileReader();
-            var parent = $(this).closest("#inputParent");
-            var prevCode = parent.data("code") || "";
+            var prevCode = "";
 
             if (this.files.length != 1) {
                 return ;
@@ -28,20 +27,17 @@
 
             reader.onloadend = function () {
                 var code = reader.result.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-                var event = new CustomEvent('IDE_SendRequest', {
+                var event = new CustomEvent('ExternalEditorToIDE', {
                     'detail': {
-                        'status': "SendCodeViaPlugin",
+                        'status': "updateCode",
                         'code': code
                     }
                 });
 
                 if (prevCode != code) {
-                    $(window.top.document)
-                        .find("#ideFrame")
-                        .contents()[0]
-                        .dispatchEvent(event);
+                    window.document.dispatchEvent(event);
 
-                    parent.data("code", code);
+                    prevCode = code;
                 }
             };
 
@@ -49,3 +45,4 @@
         });
     }, 1000);
 })();
+
