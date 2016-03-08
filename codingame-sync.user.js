@@ -12,7 +12,7 @@
     var observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
             for (let i = 0; i < mutation.addedNodes.length; i++) {
-                if (mutation.addedNodes[i].nodeType != 1) { // ELEMENT_NODE
+                if (mutation.addedNodes[i].nodeType !== 1) { // ELEMENT_NODE
                     continue ;
                 }
 
@@ -30,7 +30,7 @@
             }
 
             for (let i = 0; i < mutation.removedNodes.length; i++) {
-                if (mutation.removedNodes[i].nodeType != 1) { // ELEMENT_NODE
+                if (mutation.removedNodes[i].nodeType !== 1) { // ELEMENT_NODE
                     continue ;
                 }
 
@@ -44,7 +44,7 @@
     });
 
     var sync = function () {
-        if (!input || input.files.length != 1) {
+        if (!input || input.files.length !== 1) {
             return ;
         }
 
