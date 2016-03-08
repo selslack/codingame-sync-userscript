@@ -6,6 +6,8 @@
 // ==/UserScript==
 
 (function() {
+    'use strict';
+
     var input = null;
     var reader = new FileReader();
 
