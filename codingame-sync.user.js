@@ -58,7 +58,7 @@
         }
     };
 
-    reader.onloadend = function (event) {
+    reader.onload = function (event) {
         window.document.dispatchEvent(new CustomEvent("ExternalEditorToIDE", {
             detail: {
                 status: "updateCode",
